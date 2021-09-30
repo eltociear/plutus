@@ -24,13 +24,15 @@ module Plutus.ChainIndex.Effects(
     , getDiagnostics
     ) where
 
-import           Control.Monad.Freer.TH  (makeEffect)
-import           Ledger                  (Datum, DatumHash, MintingPolicy, MintingPolicyHash, Redeemer, RedeemerHash,
-                                          StakeValidator, StakeValidatorHash, TxId, Validator, ValidatorHash)
-import           Ledger.Credential       (Credential)
-import           Ledger.Tx               (ChainIndexTxOut, TxOutRef)
-import           Plutus.ChainIndex.Tx    (ChainIndexTx)
-import           Plutus.ChainIndex.Types (Diagnostics, Page, Point, Tip)
+import           Control.Monad.Freer.TH       (makeEffect)
+import           Ledger                       (Datum, DatumHash, MintingPolicy, MintingPolicyHash, Redeemer,
+                                               RedeemerHash, StakeValidator, StakeValidatorHash, TxId, Validator,
+                                               ValidatorHash)
+import           Ledger.Credential            (Credential)
+import           Ledger.Tx                    (ChainIndexTxOut, TxOutRef)
+import           Plutus.ChainIndex.Pagination (Page, PageQuery)
+import           Plutus.ChainIndex.Tx         (ChainIndexTx)
+import           Plutus.ChainIndex.Types      (Diagnostics, Point, Tip)
 
 data ChainIndexQueryEffect r where
 
@@ -63,7 +65,7 @@ data ChainIndexQueryEffect r where
     --   way to ask for more pages and it is uncertain whether this query
     --   will be part of the final API (because it is easy to clog up clients
     --   by producing a large number of trash UTXOs at the address)
-    UtxoSetAtAddress :: Credential -> ChainIndexQueryEffect (Tip, Page TxOutRef)
+    UtxoSetAtAddress :: PageQuery TxOutRef -> Credential -> ChainIndexQueryEffect (Tip, Page TxOutRef)
 
     -- | Get the tip of the chain index
     GetTip :: ChainIndexQueryEffect Tip

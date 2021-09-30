@@ -32,8 +32,9 @@ import           Ledger.Tx                    (ChainIndexTxOut, TxOutRef)
 import           Network.HTTP.Types.Status    (Status (..))
 import           Plutus.ChainIndex.Api        (API)
 import           Plutus.ChainIndex.Effects    (ChainIndexQueryEffect (..))
+import           Plutus.ChainIndex.Pagination (Page, PageQuery)
 import           Plutus.ChainIndex.Tx         (ChainIndexTx)
-import           Plutus.ChainIndex.Types      (Page, Tip)
+import           Plutus.ChainIndex.Types      (Tip)
 import           Servant                      (NoContent, (:<|>) (..))
 import           Servant.Client               (ClientEnv, ClientError (..), ClientM, client, runClientM)
 import           Servant.Client.Core.Response (ResponseF (..))
@@ -51,11 +52,11 @@ getRedeemer :: RedeemerHash -> ClientM Redeemer
 getTxOut :: TxOutRef -> ClientM ChainIndexTxOut
 getTx :: TxId -> ClientM ChainIndexTx
 getIsUtxo :: TxOutRef -> ClientM (Tip, Bool)
-getUtxoAtAddress :: Credential -> ClientM (Tip, Page TxOutRef)
+getUtxoAtAddress :: PageQuery TxOutRef -> Credential -> ClientM (Tip, Page TxOutRef)
 getTip :: ClientM Tip
 
 (healthCheck, (getDatum, getValidator, getMintingPolicy, getStakeValidator, getRedeemer), getTxOut, getTx, getIsUtxo, getUtxoAtAddress, getTip, collectGarbage) =
-    (healthCheck_, (getDatum_, getValidator_, getMintingPolicy_, getStakeValidator_, getRedeemer_), getTxOut_, getTx_, getIsUtxo_, getUtxoAtAddress_, getTip_, collectGarbage_) where
+    (healthCheck_, (getDatum_, getValidator_, getMintingPolicy_, getStakeValidator_, getRedeemer_), getTxOut_, getTx_, getIsUtxo_, curry getUtxoAtAddress_, getTip_, collectGarbage_) where
         healthCheck_
             :<|> (getDatum_ :<|> getValidator_ :<|> getMintingPolicy_ :<|> getStakeValidator_ :<|> getRedeemer_)
             :<|> getTxOut_
@@ -100,5 +101,5 @@ handleChainIndexClient event = do
         TxOutFromRef r           -> runClientMaybe (getTxOut r)
         TxFromTxId t             -> runClientMaybe (getTx t)
         UtxoSetMembership r      -> runClient (getIsUtxo r)
-        UtxoSetAtAddress a       -> runClient (getUtxoAtAddress a)
+        UtxoSetAtAddress pq a    -> runClient (getUtxoAtAddress pq a)
         GetTip                   -> runClient getTip

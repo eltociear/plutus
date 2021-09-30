@@ -27,17 +27,18 @@ import           Control.Monad.Freer.Extras.Log    (LogMsg, logDebug, logError, 
 import           Control.Monad.Freer.State         (State, get, gets, put)
 import           Data.ByteString                   (ByteString)
 import qualified Data.ByteString.Lazy              as BSL
-import           Data.Default                      (def)
 import           Data.Either                       (fromRight)
 import qualified Data.FingerTree                   as FT
+import           Data.Int                          (Int32)
 import qualified Data.Map                          as Map
 import           Data.Maybe                        (catMaybes, fromMaybe, mapMaybe)
 import           Data.Monoid                       (Ap (..))
 import           Data.Proxy                        (Proxy (..))
 import qualified Data.Set                          as Set
 import           Data.Word                         (Word64)
-import           Database.Beam                     (Identity, SqlSelect, TableEntity, aggregate_, all_, countAll_,
-                                                    delete, filter_, limit_, nub_, select, val_)
+import           Database.Beam                     (Identity, SqlOrd ((>.)), SqlSelect, TableEntity, aggregate_, all_,
+                                                    as_, asc_, countAll_, delete, filter_, limit_, nub_, orderBy_,
+                                                    select, val_, (&&.))
 import           Database.Beam.Query               (desc_, orderBy_, (<=.), (==.), (>.))
 import           Database.Beam.Schema.Tables       (zipTables)
 import           Database.Beam.Sqlite              (Sqlite)
@@ -48,14 +49,16 @@ import           Plutus.ChainIndex.ChainIndexError (ChainIndexError (..))
 import           Plutus.ChainIndex.ChainIndexLog   (ChainIndexLog (..))
 import           Plutus.ChainIndex.DbStore
 import           Plutus.ChainIndex.Effects         (ChainIndexControlEffect (..), ChainIndexQueryEffect (..))
+import           Plutus.ChainIndex.Pagination      (Page (Page), PageQuery (..), PageSize (..), pageOf)
 import           Plutus.ChainIndex.Tx
 import           Plutus.ChainIndex.Types           (BlockId (BlockId), BlockNumber (BlockNumber), Diagnostics (..),
-                                                    Point (..), Tip (..), pageOf, tipAsPoint)
+                                                    Point (..), Tip (..), tipAsPoint)
 import           Plutus.ChainIndex.UtxoState       (InsertUtxoSuccess (..), RollbackResult (..), TxUtxoBalance,
                                                     UtxoIndex)
 import qualified Plutus.ChainIndex.UtxoState       as UtxoState
 import           Plutus.V1.Ledger.Api              (Credential (PubKeyCredential, ScriptCredential))
 import           PlutusTx.Builtins.Internal        (BuiltinByteString (..))
+import qualified PlutusTx.Prelude                  as PlutusTx
 
 type ChainIndexState = UtxoIndex TxUtxoBalance
 
@@ -107,15 +110,7 @@ handleQuery = \case
         case UtxoState.tip utxoState of
             TipAtGenesis -> throwError QueryFailedNoTip
             tp           -> pure (tp, UtxoState.isUnspentOutput r utxoState)
-    UtxoSetAtAddress cred -> do
-        utxoState <- gets @ChainIndexState UtxoState.utxoState
-        outRefs <- queryList . select $ _addressRowOutRef <$> filter_ (\row -> _addressRowCred row ==. val_ (toByteString cred)) (all_ (addressRows db))
-        let page = pageOf def $ Set.fromList $ filter (\r -> UtxoState.isUnspentOutput r utxoState) outRefs
-        case UtxoState.tip utxoState of
-            TipAtGenesis -> do
-                logWarn TipIsGenesis
-                pure (TipAtGenesis, pageOf def Set.empty)
-            tp           -> pure (tp, page)
+    UtxoSetAtAddress pageQuery cred -> getUtxoSetAtAddress pageQuery cred
     GetTip -> getTip
 
 getTip :: Member DbStoreEffect effs => Eff effs Tip
@@ -162,6 +157,58 @@ getTxOutFromRef ref@TxOutRef{txOutRefId, txOutRefIdx} = do
                 v <- maybe (Left (ValidatorHash vh)) Right <$> queryOneScript vh
                 d <- maybe (Left dh) Right <$> getDatumFromHash dh
                 pure $ Just $ ScriptChainIndexTxOut (txOutAddress txout) v d (txOutValue txout)
+
+getUtxoSetAtAddress
+  :: forall effs.
+    ( Member (State ChainIndexState) effs
+    , Member DbStoreEffect effs
+    , Member (LogMsg ChainIndexLog) effs
+    )
+  => PageQuery TxOutRef
+  -> Credential
+  -> Eff effs (Tip, Page TxOutRef)
+getUtxoSetAtAddress pageQuery@PageQuery { pageQuerySize = PageSize ps, pageQueryLastItem } cred = do
+  utxoState <- gets @ChainIndexState UtxoState.utxoState
+
+  -- let ps' = fromIntegral ps
+      -- filterPredicate row
+      --   | Just i <- pageQueryLastItem =
+      --         _addressRowCred row ==. val_ (toByteString cred)
+      --     &&. _addressRowOutRef row >. val_ (toByteString i)
+      --   | otherwise = _addressRowCred row ==. val_ (toByteString cred)
+      -- selectQuery =
+      --   select $ limit_ ps'
+      --          $ fmap _addressRowOutRef
+      --          $ filter_ filterPredicate
+      --          $ orderBy_ (asc_ . _addressRowOutRef)
+      --          $ all_ (addressRows db)
+
+  -- totalItems <- fromMaybe 0
+      --       <$> ( selectOne $ select
+      --                       $ aggregate_ (\_ -> as_ @Integer countAll_)
+      --                       $ fmap _addressRowOutRef
+      --                       $ filter_ filterPredicate
+      --                       $ orderBy_ (asc_ . _addressRowOutRef)
+      --                       $ all_ (addressRows db)
+      --           )
+  -- outRefs <- queryList selectQuery
+
+  outRefs <- queryList . select $ _addressRowOutRef <$> filter_ (\row -> _addressRowCred row ==. val_ (toByteString cred)) (all_ (addressRows db))
+
+  -- let newPageQuery = PageQuery (PageSize ps) (listToMaybe $ reverse outRefs)
+  --     totalPages =
+  --         let (d, m) = totalItems `divMod` ps'
+  --         in if m == 0 then d else d + 1
+
+  -- let page = Page pageQuery (Just newPageQuery) totalItems totalPages outRefs
+  let page = pageOf pageQuery
+                  $ Set.fromList
+                  $ filter (flip UtxoState.isUnspentOutput utxoState) outRefs
+  case UtxoState.tip utxoState of
+      TipAtGenesis -> do
+          logWarn TipIsGenesis
+          pure (TipAtGenesis, pageOf pageQuery Set.empty)
+      tp           -> pure (tp, page)
 
 queryOneScript ::
     ( Member DbStoreEffect effs
@@ -289,14 +336,23 @@ fromTx tx = mempty
         [ fromMap citxScripts ScriptRow
         , fromMap citxRedeemers ScriptRow
         ]
-    , txRows = fromPairs (const [(_citxTxId tx, tx)]) TxRow
+    , txRows = InsertRows [TxRow (PlutusTx.fromBuiltin $ getTxId $ _citxTxId tx) (toByteString tx)]
     , addressRows = fromPairs (fmap credential . txOutsWithRef) AddressRow
     }
     where
         credential (TxOut{txOutAddress=Address{addressCredential}}, ref) = (addressCredential, ref)
-        fromMap :: (BeamableSqlite t, Serialise k, Serialise v) => Lens' ChainIndexTx (Map.Map k v) -> (ByteString -> ByteString -> t Identity) -> InsertRows (TableEntity t)
+        fromMap
+          :: (BeamableSqlite t, Serialise k, Serialise v)
+          => Lens' ChainIndexTx (Map.Map k v)
+          -> (ByteString -> ByteString -> t Identity)
+          -> InsertRows (TableEntity t)
         fromMap l = fromPairs (Map.toList . view l)
-        fromPairs :: (BeamableSqlite t, Serialise k, Serialise v) => (ChainIndexTx -> [(k, v)]) -> (ByteString -> ByteString -> t Identity) -> InsertRows (TableEntity t)
+        fromPairs
+          :: (BeamableSqlite t, Serialise k, Serialise v)
+          => (ChainIndexTx
+          -> [(k, v)])
+          -> (ByteString -> ByteString -> t Identity)
+          -> InsertRows (TableEntity t)
         fromPairs l mkRow = InsertRows . fmap (\(k, v) -> mkRow (toByteString k) (toByteString v)) . l $ tx
 
 

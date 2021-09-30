@@ -2,13 +2,15 @@
 {-# LANGUAGE TypeOperators #-}
 module Plutus.ChainIndex.Api(API, FromHashAPI) where
 
-import           Ledger                  (Datum, DatumHash, MintingPolicy, MintingPolicyHash, Redeemer, RedeemerHash,
-                                          StakeValidator, StakeValidatorHash, TxId, Validator, ValidatorHash)
-import           Ledger.Credential       (Credential)
-import           Ledger.Tx               (ChainIndexTxOut, TxOutRef)
-import           Plutus.ChainIndex.Tx    (ChainIndexTx)
-import           Plutus.ChainIndex.Types (Diagnostics, Page, Tip)
-import           Servant.API             (Get, JSON, NoContent, Post, Put, ReqBody, (:<|>), (:>))
+import           Ledger                       (Datum, DatumHash, MintingPolicy, MintingPolicyHash, Redeemer,
+                                               RedeemerHash, StakeValidator, StakeValidatorHash, TxId, Validator,
+                                               ValidatorHash)
+import           Ledger.Credential            (Credential)
+import           Ledger.Tx                    (ChainIndexTxOut, TxOutRef)
+import           Plutus.ChainIndex.Pagination (Page, PageQuery)
+import           Plutus.ChainIndex.Tx         (ChainIndexTx)
+import           Plutus.ChainIndex.Types      (Diagnostics, Tip)
+import           Servant.API                  (Get, JSON, NoContent, Post, Put, ReqBody, (:<|>), (:>))
 
 type API
     = "healthcheck" :> Get '[JSON] NoContent
@@ -16,7 +18,7 @@ type API
     :<|> "tx-out" :> ReqBody '[JSON] TxOutRef :> Post '[JSON] ChainIndexTxOut
     :<|> "tx" :> ReqBody '[JSON] TxId :> Post '[JSON] ChainIndexTx
     :<|> "is-utxo" :> ReqBody '[JSON] TxOutRef :> Post '[JSON] (Tip, Bool)
-    :<|> "utxo-at-address" :> ReqBody '[JSON] Credential :> Post '[JSON] (Tip, Page TxOutRef)
+    :<|> "utxo-at-address" :> ReqBody '[JSON] (PageQuery TxOutRef, Credential) :> Post '[JSON] (Tip, Page TxOutRef)
     :<|> "tip" :> Get '[JSON] Tip
     :<|> "collect-garbage" :> Put '[JSON] NoContent
     :<|> "diagnostics" :> Get '[JSON] Diagnostics

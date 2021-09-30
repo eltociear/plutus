@@ -83,7 +83,7 @@ serveChainIndex =
     :<|> (E.txOutFromRef >=> fromMaybe)
     :<|> (E.txFromTxId >=> fromMaybe)
     :<|> E.utxoSetMembership
-    :<|> E.utxoSetAtAddress
+    :<|> uncurry E.utxoSetAtAddress
     :<|> E.getTip
     :<|> E.collectGarbage *> pure NoContent
     :<|> E.getDiagnostics

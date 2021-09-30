@@ -8,9 +8,6 @@
 module Plutus.ChainIndex.Types(
     BlockId(..)
     , blockId
-    , Page(..)
-    , PageSize(..)
-    , pageOf
     , Tip(..)
     , Point(..)
     , pointsToTip
@@ -30,29 +27,18 @@ import           Crypto.Hash                      (SHA256, hash)
 import           Data.Aeson                       (FromJSON, ToJSON)
 import qualified Data.ByteArray                   as BA
 import qualified Data.ByteString.Lazy             as BSL
-import           Data.Default                     (Default (..))
 import           Data.Map                         (Map)
 import qualified Data.Map                         as Map
 import           Data.Monoid                      (Last (..), Sum (..))
 import           Data.Semigroup.Generic           (GenericSemigroupMonoid (..))
-import           Data.Set                         (Set)
-import qualified Data.Set                         as Set
 import           Data.Text.Prettyprint.Doc.Extras (PrettyShow (..))
 import           Data.Word                        (Word64)
 import           GHC.Generics                     (Generic)
 import           Ledger.Blockchain                (Block, BlockId (..))
 import           Ledger.Slot                      (Slot)
 import           Ledger.TxId                      (TxId)
-import           Numeric.Natural                  (Natural)
 import           PlutusTx.Lattice                 (MeetSemiLattice (..))
 import           Prettyprinter                    (Pretty (..), (<+>))
-
-newtype PageSize = PageSize { getPageSize :: Natural }
-    deriving stock (Eq, Ord, Show, Generic)
-    deriving anyclass (ToJSON, FromJSON)
-
-instance Default PageSize where
-    def = PageSize 50
 
 -- | Compute a hash of the block's contents.
 blockId :: Block -> BlockId
@@ -61,24 +47,6 @@ blockId = BlockId
         . hash @_ @SHA256
         . BSL.toStrict
         . CBOR.serialise
--- | Part of a collection
-data Page a = Page { pageSize :: PageSize, pageNumber :: Int, totalPages :: Int, pageItems :: [a]}
-    deriving stock (Eq, Ord, Show, Generic)
-    deriving anyclass (ToJSON, FromJSON)
-
--- | A page with the given size
-pageOf :: PageSize -> Set a -> Page a
-pageOf (PageSize ps) items =
-    let totalPages =
-            let (d, m) = Set.size items `divMod` ps'
-            in if m == 0 then d else d + 1
-        ps' = fromIntegral ps
-    in Page
-        { pageSize = PageSize ps
-        , pageNumber = 1
-        , totalPages
-        , pageItems = take ps' $ Set.toList items
-        }
 
 -- | The tip of the chain index.
 data Tip =

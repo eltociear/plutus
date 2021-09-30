@@ -70,27 +70,28 @@ module Plutus.Contract.Effects( -- TODO: Move to Requests.Internal
     ActiveEndpoint(..),
     ) where
 
-import           Control.Lens                (Iso', Prism', iso, makePrisms, prism')
-import           Data.Aeson                  (FromJSON, ToJSON)
-import qualified Data.Aeson                  as JSON
-import           Data.List.NonEmpty          (NonEmpty)
-import qualified Data.OpenApi.Schema         as OpenApi
-import           Data.Text.Prettyprint.Doc   (Pretty (..), hsep, indent, viaShow, vsep, (<+>))
-import           GHC.Generics                (Generic)
-import           Ledger                      (Address, Datum, DatumHash, MintingPolicy, MintingPolicyHash, PubKey,
-                                              Redeemer, RedeemerHash, StakeValidator, StakeValidatorHash, Tx, TxId,
-                                              TxOutRef, ValidatorHash, txId)
-import           Ledger.Constraints.OffChain (UnbalancedTx)
-import           Ledger.Credential           (Credential)
-import           Ledger.Scripts              (Validator)
-import           Ledger.Slot                 (Slot (..), SlotRange)
-import           Ledger.Time                 (POSIXTime (..), POSIXTimeRange)
-import           Ledger.TimeSlot             (SlotConversionError)
-import           Ledger.Tx                   (ChainIndexTxOut)
-import           Plutus.ChainIndex.Tx        (ChainIndexTx (_citxTxId))
-import           Plutus.ChainIndex.Types     (Page (pageItems), Tip (..), TxStatus (..))
-import           Wallet.API                  (WalletAPIError)
-import           Wallet.Types                (ContractInstanceId, EndpointDescription, EndpointValue)
+import           Control.Lens                 (Iso', Prism', iso, makePrisms, prism')
+import           Data.Aeson                   (FromJSON, ToJSON)
+import qualified Data.Aeson                   as JSON
+import           Data.List.NonEmpty           (NonEmpty)
+import qualified Data.OpenApi.Schema          as OpenApi
+import           Data.Text.Prettyprint.Doc    (Pretty (..), hsep, indent, viaShow, vsep, (<+>))
+import           GHC.Generics                 (Generic)
+import           Ledger                       (Address, Datum, DatumHash, MintingPolicy, MintingPolicyHash, PubKey,
+                                               Redeemer, RedeemerHash, StakeValidator, StakeValidatorHash, Tx, TxId,
+                                               TxOutRef, ValidatorHash, txId)
+import           Ledger.Constraints.OffChain  (UnbalancedTx)
+import           Ledger.Credential            (Credential)
+import           Ledger.Scripts               (Validator)
+import           Ledger.Slot                  (Slot (..), SlotRange)
+import           Ledger.Time                  (POSIXTime (..), POSIXTimeRange)
+import           Ledger.TimeSlot              (SlotConversionError)
+import           Ledger.Tx                    (ChainIndexTxOut)
+import           Plutus.ChainIndex.Pagination (Page (pageItems), PageQuery)
+import           Plutus.ChainIndex.Tx         (ChainIndexTx (_citxTxId))
+import           Plutus.ChainIndex.Types      (Tip (..), TxStatus (..))
+import           Wallet.API                   (WalletAPIError)
+import           Wallet.Types                 (ContractInstanceId, EndpointDescription, EndpointValue)
 
 -- | Requests that 'Contract's can make
 data PABReq =
@@ -209,7 +210,7 @@ data ChainIndexQuery =
   | TxOutFromRef TxOutRef
   | TxFromTxId TxId
   | UtxoSetMembership TxOutRef
-  | UtxoSetAtAddress Credential
+  | UtxoSetAtAddress (PageQuery TxOutRef) Credential
   | GetTip
     deriving stock (Eq, Show, Generic)
     deriving anyclass (ToJSON, FromJSON, OpenApi.ToSchema)
@@ -224,7 +225,7 @@ instance Pretty ChainIndexQuery where
         TxOutFromRef r             -> "requesting utxo from utxo reference" <+> pretty r
         TxFromTxId i               -> "requesting chain index tx from id" <+> pretty i
         UtxoSetMembership txOutRef -> "whether tx output is part of the utxo set" <+> pretty txOutRef
-        UtxoSetAtAddress c         -> "requesting utxos located at addresses with the credential" <+> pretty c
+        UtxoSetAtAddress _ c       -> "requesting utxos located at addresses with the credential" <+> pretty c
         GetTip                     -> "requesting the tip of the chain index"
 
 -- | Represents all possible responses to chain index queries. Each constructor

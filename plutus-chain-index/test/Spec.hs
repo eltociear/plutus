@@ -23,6 +23,8 @@ import           Hedgehog                             (Property, annotateShow, a
 import qualified Hedgehog.Gen                         as Gen
 import qualified Hedgehog.Range                       as Range
 import qualified Plutus.ChainIndex.Emulator.DiskState as DiskState
+import qualified Plutus.ChainIndex.HandlersSpec       as HandlersSpec
+import qualified Plutus.ChainIndex.PaginationSpec     as PaginationSpec
 import           Plutus.ChainIndex.Tx                 (citxTxId, txOutsWithRef)
 import           Plutus.ChainIndex.TxIdState          (increaseDepth, transactionStatus)
 import qualified Plutus.ChainIndex.TxIdState          as TxIdState
@@ -42,6 +44,8 @@ tests =
   testGroup "tests"
     [ testGroup "utxo balance" utxoBalanceTests
     , testGroup "txidstate" txIdStateTests
+    , HandlersSpec.tests
+    , PaginationSpec.tests
     ]
 
 utxoBalanceTests :: [TestTree]
