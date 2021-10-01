@@ -1,4 +1,4 @@
-module Template.Types
+module Component.Template.Types
   ( State
   , ContractSetupStage(..)
   , Input

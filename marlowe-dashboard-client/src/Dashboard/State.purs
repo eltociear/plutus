@@ -15,6 +15,11 @@ import Clipboard (handleAction) as Clipboard
 import Component.InputField.Lenses (_value)
 import Component.InputField.Types (Action(..)) as InputField
 import Component.LoadingSubmitButton.Types (Query(..), _submitButtonSlot)
+import Component.Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs)
+import Component.Template.State (dummyState, handleAction, initialState) as Template
+import Component.Template.State (instantiateExtendedContract)
+import Component.Template.Types (Action(..), State) as Template
+import Component.Template.Types (ContractSetupStage(..))
 import Contacts.Lenses (_cardSection, _pubKeyHash, _walletInfo, _walletLibrary, _walletNickname)
 import Contacts.State (defaultWalletDetails)
 import Contacts.State (handleAction, mkInitialState) as Contacts
@@ -53,11 +58,6 @@ import Page.Contract.Lenses (_Started, _Starting, _marloweParams, _nickname, _se
 import Page.Contract.State (applyTimeout)
 import Page.Contract.State (dummyState, handleAction, mkInitialState, mkPlaceholderState, updateState) as Contract
 import Page.Contract.Types (Action(..), State(..), StartingState) as Contract
-import Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs)
-import Template.State (dummyState, handleAction, initialState) as Template
-import Template.State (instantiateExtendedContract)
-import Template.Types (Action(..), State) as Template
-import Template.Types (ContractSetupStage(..))
 import Toast.Types (ajaxErrorToast, decodedAjaxErrorToast, errorToast, successToast)
 
 -- see note [dummyState] in MainFrame.State

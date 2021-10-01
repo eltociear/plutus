@@ -10,6 +10,7 @@ module Dashboard.Types
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
 import Clipboard (Action) as Clipboard
+import Component.Template.Types (Action, State) as Template
 import Contacts.Types (Action, State) as Contacts
 import Contacts.Types (WalletDetails, WalletNickname)
 import Data.Map (Map)
@@ -20,7 +21,6 @@ import Marlowe.Execution.Types (NamedAction)
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (MarloweData, MarloweParams, Slot)
 import Page.Contract.Types (Action, State) as Contract
-import Template.Types (Action, State) as Template
 
 type State
   = { contactsState :: Contacts.State

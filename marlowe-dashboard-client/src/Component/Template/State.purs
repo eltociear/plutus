@@ -1,4 +1,4 @@
-module Template.State
+module Component.Template.State
   ( dummyState
   , initialState
   , handleAction
@@ -12,6 +12,8 @@ import Component.InputField.State (dummyState, handleAction, mkInitialState) as 
 import Component.InputField.State (formatBigIntegerValue, getBigIntegerValue, validate)
 import Component.InputField.Types (Action(..), State) as InputField
 import Component.InputField.Types (class InputFieldError)
+import Component.Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInput, _roleWalletInputs, _slotContentInput, _slotContentInputs, _valueContentInput, _valueContentInputs)
+import Component.Template.Types (Action(..), ContractNicknameError(..), ContractSetupStage(..), Input, RoleError(..), SlotError(..), State, ValueError(..))
 import Contacts.Types (WalletLibrary)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Array (mapMaybe) as Array
@@ -41,8 +43,6 @@ import Marlowe.HasParties (getParties)
 import Marlowe.Semantics (Contract) as Semantic
 import Marlowe.Semantics (Party(..), Slot, TokenName)
 import Marlowe.Template (TemplateContent(..), _slotContent, _valueContent, fillTemplate, getPlaceholderIds, initializeTemplateContent)
-import Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInput, _roleWalletInputs, _slotContentInput, _slotContentInputs, _valueContentInput, _valueContentInputs)
-import Template.Types (Action(..), ContractNicknameError(..), ContractSetupStage(..), Input, RoleError(..), SlotError(..), State, ValueError(..))
 import Web.HTML.HTMLElement (focus)
 
 -- see note [dummyState] in MainFrame.State

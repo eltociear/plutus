@@ -1,4 +1,4 @@
-module Template.View (contractTemplateCard) where
+module Component.Template.View (contractTemplateCard) where
 
 import Prologue hiding (Either(..), div)
 import Component.InputField.Lenses (_value)
@@ -8,6 +8,9 @@ import Component.InputField.View (renderInput)
 import Component.Label as Label
 import Component.LoadingSubmitButton.State (loadingSubmitButton)
 import Component.LoadingSubmitButton.Types (Message(..))
+import Component.Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs, _slotContentInputs, _valueContentInputs)
+import Component.Template.State (templateSetupIsValid)
+import Component.Template.Types (Action(..), ContractSetupStage(..), RoleError, SlotError, State, ValueError)
 import Contacts.Lenses (_walletNickname)
 import Contacts.State (adaToken, getAda)
 import Contacts.Types (WalletLibrary)
@@ -35,9 +38,6 @@ import Marlowe.Template (orderContentUsingMetadata)
 import Material.Icons (Icon(..)) as Icon
 import Material.Icons (Icon, icon, icon_)
 import Popper (Placement(..))
-import Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs, _slotContentInputs, _valueContentInputs)
-import Template.State (templateSetupIsValid)
-import Template.Types (Action(..), ContractSetupStage(..), RoleError, SlotError, State, ValueError)
 import Text.Markdown.TrimmedInline (markdownToHTML)
 import Tooltip.State (tooltip)
 import Tooltip.Types (ReferenceId(..))
