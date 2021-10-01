@@ -5,6 +5,14 @@ module Contacts.View
 
 import Prelude hiding (div)
 import Clipboard (Action(..)) as Clipboard
+import Component.InputField.Lenses (_value)
+import Component.InputField.State (validate)
+import Component.InputField.Types (State) as InputField
+import Component.InputField.View (renderInput)
+import Component.Label as Label
+import Component.WalletId as WalletId
+import Contacts.Lenses (_cardSection, _companionAppId, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
+import Contacts.Types (Action(..), CardSection(..), State, WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
 import Css as Css
 import Data.Lens (view, (^.))
 import Data.Map (isEmpty, toUnfoldable)
@@ -16,16 +24,8 @@ import Halogen.Css (classNames)
 import Halogen.HTML (HTML, a, button, div, h2, h3, li, p, span, text, ul)
 import Halogen.HTML.Events.Extra (onClick_)
 import Halogen.HTML.Properties (disabled)
-import InputField.Lenses (_value)
-import InputField.State (validate)
-import InputField.Types (State) as InputField
-import InputField.View (renderInput)
 import Material.Icons (Icon(..)) as Icon
 import Material.Icons (icon_)
-import Contacts.Lenses (_cardSection, _companionAppId, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
-import Contacts.Types (Action(..), CardSection(..), State, WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
-import Component.Label as Label
-import Component.WalletId as WalletId
 
 contactsCard :: forall p. WalletDetails -> State -> HTML p Action
 contactsCard currentWallet state =

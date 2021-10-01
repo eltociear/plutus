@@ -1,4 +1,4 @@
-module InputField.Lenses
+module Component.InputField.Lenses
   ( _value
   , _pristine
   , _validator
@@ -15,11 +15,11 @@ module InputField.Lenses
   ) where
 
 import Prologue
+import Component.InputField.Types (InputDisplayOptions, State)
 import Data.Lens (Lens')
 import Data.Lens.Record (prop)
 import Data.Symbol (SProxy(..))
 import Halogen.HTML (HTML)
-import InputField.Types (InputDisplayOptions, State)
 import Marlowe.Extended.Metadata (NumberFormat)
 
 _value :: forall e. Lens' (State e) String

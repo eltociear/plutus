@@ -11,12 +11,12 @@ module Template.Types
 
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
+import Component.InputField.Types (Action, State) as InputField
+import Component.InputField.Types (class InputFieldError)
+import Contacts.Types (WalletLibrary)
 import Data.Map (Map)
-import InputField.Types (Action, State) as InputField
-import InputField.Types (class InputFieldError)
 import Marlowe.Extended.Metadata (ContractTemplate)
 import Marlowe.Semantics (Slot, TokenName)
-import Contacts.Types (WalletLibrary)
 
 type State
   = { contractSetupStage :: ContractSetupStage

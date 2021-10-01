@@ -1,6 +1,10 @@
 module Template.View (contractTemplateCard) where
 
 import Prologue hiding (Either(..), div)
+import Component.InputField.Lenses (_value)
+import Component.InputField.Types (InputDisplayOptions)
+import Component.InputField.Types (State) as InputField
+import Component.InputField.View (renderInput)
 import Component.Label as Label
 import Contacts.Lenses (_walletNickname)
 import Contacts.State (adaToken, getAda)
@@ -20,10 +24,6 @@ import Halogen.HTML.Events.Extra (onClick_)
 import Halogen.HTML.Properties (enabled, for, id_)
 import Hint.State (hint)
 import Humanize (contractIcon, humanizeValue)
-import InputField.Lenses (_value)
-import InputField.Types (InputDisplayOptions)
-import InputField.Types (State) as InputField
-import InputField.View (renderInput)
 import LoadingSubmitButton.State (loadingSubmitButton)
 import LoadingSubmitButton.Types (Message(..))
 import MainFrame.Types (ChildSlots)

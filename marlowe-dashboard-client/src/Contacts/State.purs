@@ -16,6 +16,11 @@ import Capability.MarloweStorage (class ManageMarloweStorage, insertIntoWalletLi
 import Capability.Toast (class Toast, addToast)
 import Clipboard (class MonadClipboard)
 import Clipboard (handleAction) as Clipboard
+import Component.InputField.Lenses (_pristine, _value)
+import Component.InputField.State (handleAction, mkInitialState) as InputField
+import Component.InputField.Types (Action(..), State) as InputField
+import Contacts.Lenses (_cardSection, _remoteWalletInfo, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
+import Contacts.Types (Action(..), CardSection(..), PubKeyHash(..), State, Wallet(..), WalletDetails, WalletIdError(..), WalletInfo(..), WalletLibrary, WalletNickname, WalletNicknameError(..))
 import Control.Monad.Reader (class MonadAsk)
 import Dashboard.Types (Action(..)) as Dashboard
 import Data.Array (any)
@@ -33,9 +38,6 @@ import Env (Env)
 import Halogen (HalogenM, modify_)
 import Halogen.Extra (mapSubmodule)
 import Halogen.Query.HalogenM (mapAction)
-import InputField.Lenses (_pristine, _value)
-import InputField.State (handleAction, mkInitialState) as InputField
-import InputField.Types (Action(..), State) as InputField
 import MainFrame.Types (Action(..)) as MainFrame
 import MainFrame.Types (ChildSlots, Msg)
 import Marlowe.PAB (PlutusAppId(..))
@@ -43,8 +45,6 @@ import Marlowe.Semantics (Assets, Token(..))
 import Network.RemoteData (RemoteData(..), fromEither)
 import Toast.Types (errorToast, successToast)
 import Types (WebData)
-import Contacts.Lenses (_cardSection, _remoteWalletInfo, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
-import Contacts.Types (Action(..), CardSection(..), PubKeyHash(..), State, Wallet(..), WalletDetails, WalletIdError(..), WalletInfo(..), WalletLibrary, WalletNickname, WalletNicknameError(..))
 
 mkInitialState :: WalletLibrary -> State
 mkInitialState walletLibrary =

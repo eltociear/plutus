@@ -12,6 +12,8 @@ import Capability.MarloweStorage (class ManageMarloweStorage, getWalletLibrary, 
 import Capability.Toast (class Toast, addToast)
 import Clipboard (class MonadClipboard)
 import Clipboard (handleAction) as Clipboard
+import Component.InputField.Lenses (_value)
+import Component.InputField.Types (Action(..)) as InputField
 import Contacts.Lenses (_cardSection, _pubKeyHash, _walletInfo, _walletLibrary, _walletNickname)
 import Contacts.State (defaultWalletDetails)
 import Contacts.State (handleAction, mkInitialState) as Contacts
@@ -38,8 +40,6 @@ import Effect.Aff.Class (class MonadAff)
 import Env (DataProvider(..), Env)
 import Halogen (HalogenM, modify_, query, tell)
 import Halogen.Extra (mapMaybeSubmodule, mapSubmodule)
-import InputField.Lenses (_value)
-import InputField.Types (Action(..)) as InputField
 import LoadingSubmitButton.Types (Query(..), _submitButtonSlot)
 import MainFrame.Types (Action(..)) as MainFrame
 import MainFrame.Types (ChildSlots, Msg)

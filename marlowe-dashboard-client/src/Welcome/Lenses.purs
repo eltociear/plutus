@@ -10,13 +10,13 @@ module Welcome.Lenses
   ) where
 
 import Prologue
+import Component.InputField.Types (State) as InputField
+import Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
 import Data.Lens (Lens')
 import Data.Lens.Record (prop)
 import Data.Symbol (SProxy(..))
-import InputField.Types (State) as InputField
 import Marlowe.PAB (PlutusAppId)
 import Types (WebData)
-import Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
 import Welcome.Types (Card, State, WalletNicknameOrIdError)
 
 _card :: Lens' State (Maybe Card)

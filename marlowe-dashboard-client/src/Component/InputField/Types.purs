@@ -1,4 +1,4 @@
-module InputField.Types
+module Component.InputField.Types
   ( State
   , class InputFieldError
   , inputErrorToString

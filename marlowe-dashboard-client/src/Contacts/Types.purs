@@ -15,14 +15,14 @@ module Contacts.Types
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
 import Clipboard (Action) as Clipboard
+import Component.InputField.Types (Action, State) as InputField
+import Component.InputField.Types (class InputFieldError)
 import Data.BigInteger (BigInteger)
 import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
 import Data.Newtype (class Newtype)
 import Foreign.Class (class Encode, class Decode)
 import Foreign.Generic (defaultOptions, genericDecode, genericEncode)
-import InputField.Types (Action, State) as InputField
-import InputField.Types (class InputFieldError)
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (Assets, MarloweData, MarloweParams, PubKey)
 import Types (WebData)

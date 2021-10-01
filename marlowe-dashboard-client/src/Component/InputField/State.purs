@@ -1,4 +1,4 @@
-module InputField.State
+module Component.InputField.State
   ( dummyState
   , mkInitialState
   , handleAction
@@ -8,6 +8,8 @@ module InputField.State
   ) where
 
 import Prologue
+import Component.InputField.Lenses (_dropdownLocked, _dropdownOpen, _pristine, _validator, _value)
+import Component.InputField.Types (class InputFieldError, Action(..), State)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Array (head, last)
 import Data.Array (length, take) as Array
@@ -22,8 +24,6 @@ import Data.String.Extra (leftPadTo, rightPadTo)
 import Effect.Aff.Class (class MonadAff)
 import Env (Env)
 import Halogen (HalogenM, modify_)
-import InputField.Lenses (_dropdownLocked, _dropdownOpen, _pristine, _validator, _value)
-import InputField.Types (class InputFieldError, Action(..), State)
 import Marlowe.Extended.Metadata (NumberFormat(..))
 
 -- see note [dummyState] in MainFrame.State

@@ -16,16 +16,16 @@ module Contacts.Lenses
   ) where
 
 import Prologue
+import Component.InputField.Types (State) as InputField
+import Contacts.Types (CardSection, PubKeyHash, State, Wallet, WalletIdError, WalletInfo, WalletLibrary, WalletNickname, WalletNicknameError, WalletDetails)
 import Data.Lens (Lens')
 import Data.Lens.Iso.Newtype (_Newtype)
 import Data.Lens.Record (prop)
 import Data.Map (Map)
 import Data.Symbol (SProxy(..))
-import InputField.Types (State) as InputField
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (Assets, MarloweData, MarloweParams, PubKey)
 import Types (WebData)
-import Contacts.Types (CardSection, PubKeyHash, State, Wallet, WalletIdError, WalletInfo, WalletLibrary, WalletNickname, WalletNicknameError, WalletDetails)
 
 _walletLibrary :: Lens' State WalletLibrary
 _walletLibrary = prop (SProxy :: SProxy "walletLibrary")

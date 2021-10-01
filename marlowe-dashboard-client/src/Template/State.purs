@@ -7,6 +7,12 @@ module Template.State
   ) where
 
 import Prologue
+import Component.InputField.Lenses (_value)
+import Component.InputField.State (dummyState, handleAction, mkInitialState) as InputField
+import Component.InputField.State (formatBigIntegerValue, getBigIntegerValue, validate)
+import Component.InputField.Types (Action(..), State) as InputField
+import Component.InputField.Types (class InputFieldError)
+import Contacts.Types (WalletLibrary)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Array (mapMaybe) as Array
 import Data.BigInteger (BigInteger)
@@ -27,11 +33,6 @@ import Examples.PureScript.Swap (defaultSlotContent) as Swap
 import Examples.PureScript.ZeroCouponBond (defaultSlotContent) as ZeroCouponBond
 import Halogen (HalogenM, RefLabel(..), getHTMLElementRef, modify_)
 import Halogen.Extra (mapMaybeSubmodule, mapSubmodule)
-import InputField.Lenses (_value)
-import InputField.State (dummyState, handleAction, mkInitialState) as InputField
-import InputField.State (formatBigIntegerValue, getBigIntegerValue, validate)
-import InputField.Types (Action(..), State) as InputField
-import InputField.Types (class InputFieldError)
 import MainFrame.Types (ChildSlots, Msg)
 import Marlowe.Extended (Contract) as Extended
 import Marlowe.Extended (ContractType(..), resolveRelativeTimes, toCore)
@@ -42,7 +43,6 @@ import Marlowe.Semantics (Party(..), Slot, TokenName)
 import Marlowe.Template (TemplateContent(..), _slotContent, _valueContent, fillTemplate, getPlaceholderIds, initializeTemplateContent)
 import Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInput, _roleWalletInputs, _slotContentInput, _slotContentInputs, _valueContentInput, _valueContentInputs)
 import Template.Types (Action(..), ContractNicknameError(..), ContractSetupStage(..), Input, RoleError(..), SlotError(..), State, ValueError(..))
-import Contacts.Types (WalletLibrary)
 import Web.HTML.HTMLElement (focus)
 
 -- see note [dummyState] in MainFrame.State

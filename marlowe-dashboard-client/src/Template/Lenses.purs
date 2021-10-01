@@ -11,13 +11,13 @@ module Template.Lenses
   ) where
 
 import Prologue
+import Component.InputField.Types (State) as InputField
 import Data.Lens (Lens', Traversal')
 import Data.Lens.At (at)
 import Data.Lens.Prism.Maybe (_Just)
 import Data.Lens.Record (prop)
 import Data.Map (Map)
 import Data.Symbol (SProxy(..))
-import InputField.Types (State) as InputField
 import Marlowe.Extended.Metadata (ContractTemplate)
 import Marlowe.Semantics (TokenName)
 import Template.Types (ContractSetupStage, ContractNicknameError, RoleError, SlotError, State, ValueError)

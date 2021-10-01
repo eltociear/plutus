@@ -5,6 +5,14 @@ module Welcome.View
 
 import Prologue hiding (div)
 import Clipboard (Action(..)) as Clipboard
+import Component.InputField.Lenses (_value)
+import Component.InputField.State (validate)
+import Component.InputField.Types (InputDisplayOptions)
+import Component.InputField.View (renderInput)
+import Component.Label as Label
+import Component.WalletId as WalletId
+import Contacts.Lenses (_walletNickname)
+import Contacts.View (walletIdTip)
 import Css as Css
 import Data.Lens (view, (^.))
 import Data.List (foldMap)
@@ -18,19 +26,11 @@ import Halogen.HTML (HTML, a, br_, button, div, div_, h2, hr, iframe, img, main,
 import Halogen.HTML.Events.Extra (onClick_)
 import Halogen.HTML.Properties (disabled, href, src, title)
 import Images (marloweRunLogo)
-import InputField.Lenses (_value)
-import InputField.State (validate)
-import InputField.Types (InputDisplayOptions)
-import InputField.View (renderInput)
 import Marlowe.PAB (PlutusAppId)
 import Material.Icons (Icon(..)) as Icon
-import Network.RemoteData (isSuccess)
 import Material.Icons (icon, icon_)
+import Network.RemoteData (isSuccess)
 import Prim.TypeError (class Warn, Text)
-import Contacts.Lenses (_walletNickname)
-import Contacts.View (walletIdTip)
-import Component.Label as Label
-import Component.WalletId as WalletId
 import Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
 import Welcome.Types (Action(..), Card(..), State)
 

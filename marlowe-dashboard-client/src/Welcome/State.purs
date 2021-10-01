@@ -11,6 +11,11 @@ import Capability.MarloweStorage (class ManageMarloweStorage, clearAllLocalStora
 import Capability.Toast (class Toast, addToast)
 import Clipboard (class MonadClipboard)
 import Clipboard (handleAction) as Clipboard
+import Component.InputField.State (handleAction, mkInitialState) as InputField
+import Component.InputField.Types (Action(..), State) as InputField
+import Contacts.Lenses (_companionAppId, _walletNickname)
+import Contacts.State (parsePlutusAppId, walletNicknameError)
+import Contacts.Types (WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Foldable (for_)
 import Data.Lens (assign, modifying, set, use, view, (^.))
@@ -22,17 +27,12 @@ import Env (Env)
 import Halogen (HalogenM, liftEffect, modify_)
 import Halogen.Extra (mapSubmodule)
 import Halogen.Query.HalogenM (mapAction)
-import InputField.State (handleAction, mkInitialState) as InputField
-import InputField.Types (Action(..), State) as InputField
 import MainFrame.Types (Action(..)) as MainFrame
 import MainFrame.Types (ChildSlots, Msg)
 import Marlowe.PAB (PlutusAppId(..))
 import Network.RemoteData (RemoteData(..), fromEither)
 import Toast.Types (ajaxErrorToast, errorToast, successToast)
 import Types (WebData)
-import Contacts.Lenses (_companionAppId, _walletNickname)
-import Contacts.State (parsePlutusAppId, walletNicknameError)
-import Contacts.Types (WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
 import Web.HTML (window)
 import Web.HTML.Location (reload)
 import Web.HTML.Window (location)

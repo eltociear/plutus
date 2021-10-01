@@ -8,11 +8,11 @@ module Welcome.Types
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
 import Clipboard (Action) as Clipboard
-import InputField.Types (Action, State) as InputField
-import InputField.Types (class InputFieldError)
+import Component.InputField.Types (Action, State) as InputField
+import Component.InputField.Types (class InputFieldError)
+import Contacts.Types (WalletDetails, WalletLibrary, WalletNickname, WalletNicknameError)
 import Marlowe.PAB (PlutusAppId)
 import Types (WebData)
-import Contacts.Types (WalletDetails, WalletLibrary, WalletNickname, WalletNicknameError)
 
 -- TODO (possibly): The Contacts submodule used in the Dashboard has some properties and
 -- functionality that's similar to some of what goes on here. It might be worth generalising it so
