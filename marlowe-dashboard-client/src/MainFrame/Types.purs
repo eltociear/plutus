@@ -25,7 +25,7 @@ import Toast.Types (Action, State) as Toast
 import Tooltip.Types (ReferenceId)
 import Web.Socket.Event.CloseEvent (CloseEvent, reason) as WS
 import WebSocket.Support (FromSocket) as WS
-import Welcome.Types (Action, State) as Welcome
+import Page.Welcome.Types (Action, State) as Welcome
 
 -- The app exists in one of two main subStates: the "welcome" state for when you have
 -- no wallet, and all you can do is generate one or create a new one; and the "dashboard"

@@ -1,4 +1,4 @@
-module Welcome.State
+module Page.Welcome.State
   ( dummyState
   , mkInitialState
   , handleAction
@@ -15,13 +15,12 @@ import Component.InputField.State (handleAction, mkInitialState) as InputField
 import Component.InputField.Types (Action(..), State) as InputField
 import Contacts.Lenses (_companionAppId, _walletNickname)
 import Contacts.State (parsePlutusAppId, walletNicknameError)
-import Contacts.Types (WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
+import Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Foldable (for_)
 import Data.Lens (assign, modifying, set, use, view, (^.))
 import Data.Map (filter, findMin, insert, lookup)
-import Data.Newtype (unwrap)
-import Data.UUID (emptyUUID, toString) as UUID
+import Data.UUID (emptyUUID) as UUID
 import Effect.Aff.Class (class MonadAff)
 import Env (Env)
 import Halogen (HalogenM, liftEffect, modify_)
@@ -31,13 +30,13 @@ import MainFrame.Types (Action(..)) as MainFrame
 import MainFrame.Types (ChildSlots, Msg)
 import Marlowe.PAB (PlutusAppId(..))
 import Network.RemoteData (RemoteData(..), fromEither)
+import Page.Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
+import Page.Welcome.Types (Action(..), Card(..), State, WalletNicknameOrIdError(..))
 import Toast.Types (ajaxErrorToast, errorToast, successToast)
 import Types (WebData)
 import Web.HTML (window)
 import Web.HTML.Location (reload)
 import Web.HTML.Window (location)
-import Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
-import Welcome.Types (Action(..), Card(..), State, WalletNicknameOrIdError(..))
 
 -- see note [dummyState] in MainFrame.State
 dummyState :: State

@@ -1,4 +1,4 @@
-module Welcome.Types
+module Page.Welcome.Types
   ( State
   , Card(..)
   , Action(..)

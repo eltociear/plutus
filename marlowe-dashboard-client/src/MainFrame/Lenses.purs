@@ -18,7 +18,7 @@ import Data.Time.Duration (Minutes)
 import MainFrame.Types (State, WebSocketStatus)
 import Marlowe.Semantics (Slot)
 import Toast.Types (State) as Toast
-import Welcome.Types (State) as Welcome
+import Page.Welcome.Types (State) as Welcome
 
 _webSocketStatus :: Lens' State WebSocketStatus
 _webSocketStatus = prop (SProxy :: SProxy "webSocketStatus")

@@ -1,4 +1,4 @@
-module Welcome.View
+module Page.Welcome.View
   ( welcomeScreen
   , welcomeCard
   ) where
@@ -30,9 +30,9 @@ import Marlowe.PAB (PlutusAppId)
 import Material.Icons (Icon(..)) as Icon
 import Material.Icons (icon, icon_)
 import Network.RemoteData (isSuccess)
+import Page.Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
+import Page.Welcome.Types (Action(..), Card(..), State)
 import Prim.TypeError (class Warn, Text)
-import Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
-import Welcome.Types (Action(..), Card(..), State)
 
 welcomeScreen :: forall p. State -> HTML p Action
 welcomeScreen state =

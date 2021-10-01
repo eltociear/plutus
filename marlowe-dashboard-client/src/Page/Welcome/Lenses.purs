@@ -1,4 +1,4 @@
-module Welcome.Lenses
+module Page.Welcome.Lenses
   ( _card
   , _cardOpen
   , _walletLibrary
@@ -16,8 +16,8 @@ import Data.Lens (Lens')
 import Data.Lens.Record (prop)
 import Data.Symbol (SProxy(..))
 import Marlowe.PAB (PlutusAppId)
+import Page.Welcome.Types (Card, State, WalletNicknameOrIdError)
 import Types (WebData)
-import Welcome.Types (Card, State, WalletNicknameOrIdError)
 
 _card :: Lens' State (Maybe Card)
 _card = prop (SProxy :: SProxy "card")
