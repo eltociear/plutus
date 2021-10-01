@@ -474,7 +474,11 @@ executable pir
         flat -any,
         lens -any,
         optparse-applicative -any,
-        transformers -any
+        transformers -any,
+        bytestring -any,
+        containers -any,
+        cassava -any,
+        text -any
 
 -- This runs the microbenchmarks used to generate the cost models for built-in functions,
 -- saving the results in cost-model/data/benching.csv.  It will take several hours.
