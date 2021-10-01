@@ -11,8 +11,8 @@ import Component.InputField.Types (InputDisplayOptions)
 import Component.InputField.View (renderInput)
 import Component.Label as Label
 import Component.WalletId as WalletId
-import Contacts.Lenses (_walletNickname)
-import Contacts.View (walletIdTip)
+import Component.Contacts.Lenses (_walletNickname)
+import Component.Contacts.View (walletIdTip)
 import Css as Css
 import Data.Lens (view, (^.))
 import Data.List (foldMap)

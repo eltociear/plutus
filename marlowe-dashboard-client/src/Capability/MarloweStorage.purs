@@ -28,8 +28,8 @@ import Halogen (HalogenM)
 import LocalStorage (Key(..), getItem, removeItem, setItem)
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (Assets, MarloweData, MarloweParams, TransactionInput)
-import Contacts.Lenses (_assets, _pubKeyHash, _walletInfo, _walletNickname)
-import Contacts.Types (PubKeyHash, WalletDetails, WalletLibrary)
+import Component.Contacts.Lenses (_assets, _pubKeyHash, _walletInfo, _walletNickname)
+import Component.Contacts.Types (PubKeyHash, WalletDetails, WalletLibrary)
 
 walletLibraryLocalStorageKey :: Key
 walletLibraryLocalStorageKey = Key "walletLibrary"

@@ -1,4 +1,4 @@
-module Contacts.Lenses
+module Component.Contacts.Lenses
   ( _walletLibrary
   , _cardSection
   , _walletNicknameInput
@@ -17,7 +17,7 @@ module Contacts.Lenses
 
 import Prologue
 import Component.InputField.Types (State) as InputField
-import Contacts.Types (CardSection, PubKeyHash, State, Wallet, WalletIdError, WalletInfo, WalletLibrary, WalletNickname, WalletNicknameError, WalletDetails)
+import Component.Contacts.Types (CardSection, PubKeyHash, State, Wallet, WalletIdError, WalletInfo, WalletLibrary, WalletNickname, WalletNicknameError, WalletDetails)
 import Data.Lens (Lens')
 import Data.Lens.Iso.Newtype (_Newtype)
 import Data.Lens.Record (prop)

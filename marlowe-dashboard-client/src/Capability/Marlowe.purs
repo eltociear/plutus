@@ -28,8 +28,8 @@ import Capability.MarloweStorage (class ManageMarloweStorage, addAssets, getCont
 import Capability.PlutusApps.MarloweApp as MarloweApp
 import Capability.Wallet (class ManageWallet)
 import Capability.Wallet (createWallet, getWalletInfo, getWalletTotalFunds) as Wallet
-import Contacts.Lenses (_companionAppId, _marloweAppId, _pubKey, _pubKeyHash, _wallet, _walletInfo)
-import Contacts.Types (PubKeyHash(..), Wallet(..), WalletDetails, WalletInfo(..))
+import Component.Contacts.Lenses (_companionAppId, _marloweAppId, _pubKey, _pubKeyHash, _wallet, _walletInfo)
+import Component.Contacts.Types (PubKeyHash(..), Wallet(..), WalletDetails, WalletInfo(..))
 import Control.Monad.Except (ExceptT(..), except, lift, mapExceptT, runExcept, runExceptT, withExceptT)
 import Control.Monad.Reader (asks)
 import Control.Monad.Reader.Class (ask)

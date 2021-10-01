@@ -1,4 +1,4 @@
-module Contacts.State
+module Component.Contacts.State
   ( mkInitialState
   , defaultWalletDetails
   , handleAction
@@ -19,8 +19,8 @@ import Clipboard (handleAction) as Clipboard
 import Component.InputField.Lenses (_pristine, _value)
 import Component.InputField.State (handleAction, mkInitialState) as InputField
 import Component.InputField.Types (Action(..), State) as InputField
-import Contacts.Lenses (_cardSection, _remoteWalletInfo, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
-import Contacts.Types (Action(..), CardSection(..), PubKeyHash(..), State, Wallet(..), WalletDetails, WalletIdError(..), WalletInfo(..), WalletLibrary, WalletNickname, WalletNicknameError(..))
+import Component.Contacts.Lenses (_cardSection, _remoteWalletInfo, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
+import Component.Contacts.Types (Action(..), CardSection(..), PubKeyHash(..), State, Wallet(..), WalletDetails, WalletIdError(..), WalletInfo(..), WalletLibrary, WalletNickname, WalletNicknameError(..))
 import Control.Monad.Reader (class MonadAsk)
 import Dashboard.Types (Action(..)) as Dashboard
 import Data.Array (any)

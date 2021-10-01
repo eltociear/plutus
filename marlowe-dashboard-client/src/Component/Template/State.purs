@@ -7,6 +7,7 @@ module Component.Template.State
   ) where
 
 import Prologue
+import Component.Contacts.Types (WalletLibrary)
 import Component.InputField.Lenses (_value)
 import Component.InputField.State (dummyState, handleAction, mkInitialState) as InputField
 import Component.InputField.State (formatBigIntegerValue, getBigIntegerValue, validate)
@@ -14,7 +15,6 @@ import Component.InputField.Types (Action(..), State) as InputField
 import Component.InputField.Types (class InputFieldError)
 import Component.Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInput, _roleWalletInputs, _slotContentInput, _slotContentInputs, _valueContentInput, _valueContentInputs)
 import Component.Template.Types (Action(..), ContractNicknameError(..), ContractSetupStage(..), Input, RoleError(..), SlotError(..), State, ValueError(..))
-import Contacts.Types (WalletLibrary)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Array (mapMaybe) as Array
 import Data.BigInteger (BigInteger)

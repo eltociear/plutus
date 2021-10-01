@@ -11,9 +11,9 @@ module Component.Template.Types
 
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
+import Component.Contacts.Types (WalletLibrary)
 import Component.InputField.Types (Action, State) as InputField
 import Component.InputField.Types (class InputFieldError)
-import Contacts.Types (WalletLibrary)
 import Data.Map (Map)
 import Marlowe.Extended.Metadata (ContractTemplate)
 import Marlowe.Semantics (Slot, TokenName)

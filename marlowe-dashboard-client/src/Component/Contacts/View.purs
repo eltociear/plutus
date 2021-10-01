@@ -1,4 +1,4 @@
-module Contacts.View
+module Component.Contacts.View
   ( contactsCard
   , walletIdTip
   ) where
@@ -11,8 +11,8 @@ import Component.InputField.Types (State) as InputField
 import Component.InputField.View (renderInput)
 import Component.Label as Label
 import Component.WalletId as WalletId
-import Contacts.Lenses (_cardSection, _companionAppId, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
-import Contacts.Types (Action(..), CardSection(..), State, WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
+import Component.Contacts.Lenses (_cardSection, _companionAppId, _walletIdInput, _walletLibrary, _walletNickname, _walletNicknameInput)
+import Component.Contacts.Types (Action(..), CardSection(..), State, WalletDetails, WalletIdError, WalletLibrary, WalletNicknameError)
 import Css as Css
 import Data.Lens (view, (^.))
 import Data.Map (isEmpty, toUnfoldable)

@@ -11,7 +11,7 @@ module Page.Welcome.Lenses
 
 import Prologue
 import Component.InputField.Types (State) as InputField
-import Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
+import Component.Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
 import Data.Lens (Lens')
 import Data.Lens.Record (prop)
 import Data.Symbol (SProxy(..))

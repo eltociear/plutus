@@ -14,9 +14,9 @@ module Dashboard.Lenses
   ) where
 
 import Prologue
+import Component.Contacts.Types (State) as Contacts
+import Component.Contacts.Types (WalletDetails)
 import Component.Template.Types (State) as Template
-import Contacts.Types (State) as Contacts
-import Contacts.Types (WalletDetails)
 import Dashboard.Types (Card, ContractFilter, State, WalletCompanionStatus)
 import Data.Lens (Lens', Traversal', set, wander)
 import Data.Lens.At (at)

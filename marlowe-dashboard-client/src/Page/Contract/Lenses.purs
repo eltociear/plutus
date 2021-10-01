@@ -20,7 +20,7 @@ module Page.Contract.Lenses
   ) where
 
 import Prologue
-import Contacts.Types (WalletNickname)
+import Component.Contacts.Types (WalletNickname)
 import Data.Lens (Lens', Prism', lens', prism')
 import Data.Lens.Record (prop)
 import Data.Map (Map)

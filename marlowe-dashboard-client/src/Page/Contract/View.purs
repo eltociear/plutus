@@ -5,9 +5,9 @@ module Page.Contract.View
   ) where
 
 import Prologue hiding (div)
+import Component.Contacts.State (adaToken, getAda)
 import Component.LoadingSubmitButton.State (loadingSubmitButton)
 import Component.LoadingSubmitButton.Types (Message(..))
-import Contacts.State (adaToken, getAda)
 import Css as Css
 import Data.Array (foldr, fromFoldable, intercalate, length)
 import Data.Array as Array

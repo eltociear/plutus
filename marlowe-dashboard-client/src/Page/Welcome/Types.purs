@@ -10,7 +10,7 @@ import Analytics (class IsEvent, defaultEvent, toEvent)
 import Clipboard (Action) as Clipboard
 import Component.InputField.Types (Action, State) as InputField
 import Component.InputField.Types (class InputFieldError)
-import Contacts.Types (WalletDetails, WalletLibrary, WalletNickname, WalletNicknameError)
+import Component.Contacts.Types (WalletDetails, WalletLibrary, WalletNickname, WalletNicknameError)
 import Marlowe.PAB (PlutusAppId)
 import Types (WebData)
 

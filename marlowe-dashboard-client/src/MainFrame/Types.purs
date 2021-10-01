@@ -9,8 +9,8 @@ module MainFrame.Types
 
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
+import Component.Contacts.Types (WalletDetails, WalletLibrary)
 import Component.LoadingSubmitButton.Types as LoadingSubmitButton
-import Contacts.Types (WalletDetails, WalletLibrary)
 import Dashboard.Types (Action, State) as Dashboard
 import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
@@ -20,12 +20,12 @@ import Halogen.Extra (LifecycleEvent)
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (Slot)
 import Page.Contract.Types (State) as Contract
+import Page.Welcome.Types (Action, State) as Welcome
 import Plutus.PAB.Webserver.Types (CombinedWSStreamToClient)
 import Toast.Types (Action, State) as Toast
 import Tooltip.Types (ReferenceId)
 import Web.Socket.Event.CloseEvent (CloseEvent, reason) as WS
 import WebSocket.Support (FromSocket) as WS
-import Page.Welcome.Types (Action, State) as Welcome
 
 -- The app exists in one of two main subStates: the "welcome" state for when you have
 -- no wallet, and all you can do is generate one or create a new one; and the "dashboard"

@@ -1,4 +1,4 @@
-module Contacts.Types
+module Component.Contacts.Types
   ( State
   , WalletLibrary
   , WalletNickname

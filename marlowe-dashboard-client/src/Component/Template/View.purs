@@ -1,6 +1,9 @@
 module Component.Template.View (contractTemplateCard) where
 
 import Prologue hiding (Either(..), div)
+import Component.Contacts.Lenses (_walletNickname)
+import Component.Contacts.State (adaToken, getAda)
+import Component.Contacts.Types (WalletLibrary)
 import Component.InputField.Lenses (_value)
 import Component.InputField.Types (InputDisplayOptions)
 import Component.InputField.Types (State) as InputField
@@ -11,9 +14,6 @@ import Component.LoadingSubmitButton.Types (Message(..))
 import Component.Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs, _slotContentInputs, _valueContentInputs)
 import Component.Template.State (templateSetupIsValid)
 import Component.Template.Types (Action(..), ContractSetupStage(..), RoleError, SlotError, State, ValueError)
-import Contacts.Lenses (_walletNickname)
-import Contacts.State (adaToken, getAda)
-import Contacts.Types (WalletLibrary)
 import Css as Css
 import Data.Lens (view)
 import Data.List (toUnfoldable) as List

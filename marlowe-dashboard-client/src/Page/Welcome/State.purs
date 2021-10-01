@@ -13,9 +13,9 @@ import Clipboard (class MonadClipboard)
 import Clipboard (handleAction) as Clipboard
 import Component.InputField.State (handleAction, mkInitialState) as InputField
 import Component.InputField.Types (Action(..), State) as InputField
-import Contacts.Lenses (_companionAppId, _walletNickname)
-import Contacts.State (parsePlutusAppId, walletNicknameError)
-import Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
+import Component.Contacts.Lenses (_companionAppId, _walletNickname)
+import Component.Contacts.State (parsePlutusAppId, walletNicknameError)
+import Component.Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
 import Control.Monad.Reader (class MonadAsk)
 import Data.Foldable (for_)
 import Data.Lens (assign, modifying, set, use, view, (^.))

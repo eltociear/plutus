@@ -30,7 +30,7 @@ import Plutus.Contract.Resumable (Request)
 import Plutus.PAB.Events.ContractInstanceState (PartiallyDecodedResponse)
 import Plutus.PAB.Webserver.Types (ContractActivationArgs(..), ContractInstanceClientState, ContractSignatureResponse)
 import Types (AjaxResponse)
-import Contacts.Types (Wallet)
+import Component.Contacts.Types (Wallet)
 
 -- TODO (possibly): make `AppM` a `MonadError` and remove all the `runExceptT`s
 class
