@@ -32,9 +32,9 @@ import Marlowe.Holes as T
 import Marlowe.Parser (parseContract)
 import Marlowe.Semantics (Bound(..), ChoiceId(..), Contract(..), Input(..), Party(..), Token(..), TransactionError, TransactionWarning)
 import Marlowe.Template (TemplateContent(..), fillTemplate)
+import Page.Simulation.State (mkState)
+import Page.Simulation.Types as Simulation
 import Partial.Unsafe (unsafePartial)
-import SimulationPage.State (mkState)
-import SimulationPage.Types as Simulation
 import Simulator.Lenses (_SimulationRunning, _currentContract, _currentMarloweState, _currentPossibleActions, _executionState, _marloweState, _transactionError, _transactionWarnings)
 import Simulator.State (applyInput, getAllActions, moveToSlot, startSimulation)
 import Simulator.Types (ActionInput(..))

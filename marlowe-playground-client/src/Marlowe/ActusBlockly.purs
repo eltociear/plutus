@@ -3,8 +3,8 @@ module Marlowe.ActusBlockly where
 import Prelude
 import Blockly.Generator (Generator, getFieldValue, getType, insertGeneratorFunction, mkGenerator, statementToCode)
 import Blockly.Internal (AlignDirection(..), Arg(..), BlockDefinition(..), block, blockType, defaultBlockDefinition, style, x, xml, y)
-import Blockly.Types (Block, Blockly)
 import Blockly.Toolbox (Toolbox(..), category, leaf)
+import Blockly.Types (Block, Blockly)
 import Control.Alternative ((<|>))
 import Control.Monad.Except (runExcept)
 import Data.Bifunctor (lmap, rmap)

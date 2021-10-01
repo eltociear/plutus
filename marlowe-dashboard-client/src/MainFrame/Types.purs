@@ -11,6 +11,7 @@ import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
 import Component.Contacts.Types (WalletDetails, WalletLibrary)
 import Component.LoadingSubmitButton.Types as LoadingSubmitButton
+import Component.Tooltip.Types (ReferenceId)
 import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
 import Data.Time.Duration (Minutes)
@@ -23,7 +24,6 @@ import Page.Dashboard.Types (Action, State) as Dashboard
 import Page.Welcome.Types (Action, State) as Welcome
 import Plutus.PAB.Webserver.Types (CombinedWSStreamToClient)
 import Toast.Types (Action, State) as Toast
-import Component.Tooltip.Types (ReferenceId)
 import Web.Socket.Event.CloseEvent (CloseEvent, reason) as WS
 import WebSocket.Support (FromSocket) as WS
 
