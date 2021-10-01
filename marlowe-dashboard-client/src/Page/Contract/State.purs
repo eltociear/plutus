@@ -1,4 +1,4 @@
-module Contract.State
+module Page.Contract.State
   ( dummyState
   , mkPlaceholderState
   , mkInitialState
@@ -15,8 +15,9 @@ import Capability.MainFrameLoop (class MainFrameLoop, callMainFrameAction)
 import Capability.Marlowe (class ManageMarlowe, applyTransactionInput)
 import Capability.MarloweStorage (class ManageMarloweStorage, insertIntoContractNicknames)
 import Capability.Toast (class Toast, addToast)
-import Contract.Lenses (_Started, _executionState, _expandPayments, _namedActions, _participants, _pendingTransaction, _previousSteps, _selectedStep, _userParties)
-import Contract.Types (Action(..), Input, PreviousStep, PreviousStepState(..), StartedState, State(..), Tab(..), scrollContainerRef)
+import Contacts.Lenses (_assets, _pubKeyHash, _walletInfo)
+import Contacts.State (adaToken)
+import Contacts.Types (WalletDetails, WalletNickname)
 import Control.Monad.Reader (class MonadAsk, asks)
 import Control.Monad.Reader.Class (ask)
 import Dashboard.Types (Action(..)) as Dashboard
@@ -64,10 +65,9 @@ import Marlowe.Extended.Metadata (MetaData, emptyContractMetadata)
 import Marlowe.HasParties (getParties)
 import Marlowe.Semantics (Contract, MarloweData, MarloweParams, Party(..), Slot, SlotInterval(..), TransactionInput(..), _accounts, _marloweContract, _marloweState, _minSlot, _rolesCurrency)
 import Marlowe.Semantics (Input(..)) as Semantic
+import Page.Contract.Lenses (_Started, _executionState, _expandPayments, _namedActions, _participants, _pendingTransaction, _previousSteps, _selectedStep, _userParties)
+import Page.Contract.Types (Action(..), Input, PreviousStep, PreviousStepState(..), StartedState, State(..), Tab(..), scrollContainerRef)
 import Toast.Types (ajaxErrorToast, successToast)
-import Contacts.Lenses (_assets, _pubKeyHash, _walletInfo)
-import Contacts.State (adaToken)
-import Contacts.Types (WalletDetails, WalletNickname)
 import Web.DOM.Element (getElementsByClassName)
 import Web.DOM.HTMLCollection as HTMLCollection
 import Web.Dom.ElementExtra (Alignment(..), ScrollBehavior(..), debouncedOnScroll, scrollIntoView, throttledOnScroll)

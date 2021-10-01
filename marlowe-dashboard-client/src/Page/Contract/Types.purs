@@ -1,4 +1,4 @@
-module Contract.Types
+module Page.Contract.Types
   ( State(..)
   , StartedState
   , StartingState

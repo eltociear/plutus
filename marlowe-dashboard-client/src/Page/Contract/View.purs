@@ -1,4 +1,4 @@
-module Contract.View
+module Page.Contract.View
   ( contractPreviewCard
   , contractScreen
   , actionConfirmationCard
@@ -6,9 +6,6 @@ module Contract.View
 
 import Prologue hiding (div)
 import Contacts.State (adaToken, getAda)
-import Contract.Lenses (_executionState, _expandPayments, _metadata, _namedActions, _participants, _pendingTransaction, _previousSteps, _resultingPayments, _selectedStep, _stateMetadata, _stateNickname, _userParties)
-import Contract.State (currentStep, isContractClosed)
-import Contract.Types (Action(..), Input, Movement(..), PreviousStep, PreviousStepState(..), StartedState, State(..), StepBalance, Tab(..), TimeoutInfo, scrollContainerRef)
 import Css as Css
 import Data.Array (foldr, fromFoldable, intercalate, length)
 import Data.Array as Array
@@ -48,6 +45,9 @@ import Marlowe.Slot (secondsDiff, slotToDateTime)
 import Material.Icons (Icon(..)) as Icon
 import Material.Icons (icon, icon_)
 import Material.Progress.Circular as Progress
+import Page.Contract.Lenses (_executionState, _expandPayments, _metadata, _namedActions, _participants, _pendingTransaction, _previousSteps, _resultingPayments, _selectedStep, _stateMetadata, _stateNickname, _userParties)
+import Page.Contract.State (currentStep, isContractClosed)
+import Page.Contract.Types (Action(..), Input, Movement(..), PreviousStep, PreviousStepState(..), StartedState, State(..), StepBalance, Tab(..), TimeoutInfo, scrollContainerRef)
 import Popper (Placement(..))
 import Text.Markdown.TrimmedInline (markdownToHTML)
 import Tooltip.State (tooltip)

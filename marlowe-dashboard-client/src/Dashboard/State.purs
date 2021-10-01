@@ -17,10 +17,6 @@ import Contacts.State (defaultWalletDetails)
 import Contacts.State (handleAction, mkInitialState) as Contacts
 import Contacts.Types (Action(..), State) as Contacts
 import Contacts.Types (CardSection(..), WalletDetails, WalletLibrary)
-import Contract.Lenses (_Started, _Starting, _marloweParams, _nickname, _selectedStep)
-import Contract.State (applyTimeout)
-import Contract.State (dummyState, handleAction, mkInitialState, mkPlaceholderState, updateState) as Contract
-import Contract.Types (Action(..), State(..), StartingState) as Contract
 import Control.Monad.Reader (class MonadAsk)
 import Control.Monad.Reader.Class (ask)
 import Dashboard.Lenses (_card, _cardOpen, _contractFilter, _contract, _contracts, _menuOpen, _selectedContract, _selectedContractFollowerAppId, _templateState, _walletCompanionStatus, _contactsState, _walletDetails)
@@ -53,6 +49,10 @@ import Marlowe.Execution.State (getAllPayments)
 import Marlowe.Extended.Metadata (_metaData)
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (MarloweData, MarloweParams, Party(..), Payee(..), Payment(..), Slot(..), _marloweContract)
+import Page.Contract.Lenses (_Started, _Starting, _marloweParams, _nickname, _selectedStep)
+import Page.Contract.State (applyTimeout)
+import Page.Contract.State (dummyState, handleAction, mkInitialState, mkPlaceholderState, updateState) as Contract
+import Page.Contract.Types (Action(..), State(..), StartingState) as Contract
 import Template.Lenses (_contractNicknameInput, _contractSetupStage, _contractTemplate, _roleWalletInputs)
 import Template.State (dummyState, handleAction, initialState) as Template
 import Template.State (instantiateExtendedContract)

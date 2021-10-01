@@ -14,7 +14,8 @@ module Dashboard.Lenses
   ) where
 
 import Prologue
-import Contract.Types (State) as Contract
+import Contacts.Types (State) as Contacts
+import Contacts.Types (WalletDetails)
 import Dashboard.Types (Card, ContractFilter, State, WalletCompanionStatus)
 import Data.Lens (Lens', Traversal', set, wander)
 import Data.Lens.At (at)
@@ -23,9 +24,8 @@ import Data.Lens.Record (prop)
 import Data.Map (Map, insert, lookup)
 import Data.Symbol (SProxy(..))
 import Marlowe.PAB (PlutusAppId)
+import Page.Contract.Types (State) as Contract
 import Template.Types (State) as Template
-import Contacts.Types (State) as Contacts
-import Contacts.Types (WalletDetails)
 
 _contactsState :: Lens' State Contacts.State
 _contactsState = prop (SProxy :: SProxy "contactsState")
