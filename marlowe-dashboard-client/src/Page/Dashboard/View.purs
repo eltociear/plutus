@@ -1,4 +1,4 @@
-module Dashboard.View
+module Page.Dashboard.View
   ( dashboardScreen
   , dashboardCard
   ) where
@@ -12,8 +12,8 @@ import Component.Contacts.State (adaToken, getAda)
 import Component.Contacts.Types (WalletDetails)
 import Component.Contacts.View (contactsCard)
 import Css as Css
-import Dashboard.Lenses (_card, _cardOpen, _contractFilter, _contract, _menuOpen, _selectedContract, _selectedContractFollowerAppId, _templateState, _walletDetails, _contactsState)
-import Dashboard.Types (Action(..), Card(..), ContractFilter(..), Input, State, WalletCompanionStatus(..))
+import Page.Dashboard.Lenses (_card, _cardOpen, _contractFilter, _contract, _menuOpen, _selectedContract, _selectedContractFollowerAppId, _templateState, _walletDetails, _contactsState)
+import Page.Dashboard.Types (Action(..), Card(..), ContractFilter(..), Input, State, WalletCompanionStatus(..))
 import Data.Lens (preview, view, (^.))
 import Data.Map (Map, filter, isEmpty, toUnfoldable)
 import Data.Maybe (isJust)

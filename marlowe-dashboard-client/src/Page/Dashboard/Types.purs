@@ -1,10 +1,10 @@
-module Dashboard.Types
-  ( State
-  , WalletCompanionStatus(..)
+module Page.Dashboard.Types
+  ( Action(..)
+  , State
   , Card(..)
   , ContractFilter(..)
   , Input
-  , Action(..)
+  , WalletCompanionStatus(..)
   ) where
 
 import Prologue

@@ -21,7 +21,7 @@ import Component.Contacts.Types (WalletDetails, WalletNickname)
 import Component.LoadingSubmitButton.Types (Query(..), _submitButtonSlot)
 import Control.Monad.Reader (class MonadAsk, asks)
 import Control.Monad.Reader.Class (ask)
-import Dashboard.Types (Action(..)) as Dashboard
+import Page.Dashboard.Types (Action(..)) as Dashboard
 import Data.Array (difference, filter, foldl, index, length, mapMaybe, modifyAt, null)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)

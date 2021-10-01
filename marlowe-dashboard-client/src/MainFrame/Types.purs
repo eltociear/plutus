@@ -11,7 +11,7 @@ import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
 import Component.Contacts.Types (WalletDetails, WalletLibrary)
 import Component.LoadingSubmitButton.Types as LoadingSubmitButton
-import Dashboard.Types (Action, State) as Dashboard
+import Page.Dashboard.Types (Action, State) as Dashboard
 import Data.Generic.Rep (class Generic)
 import Data.Map (Map)
 import Data.Time.Duration (Minutes)

@@ -5,14 +5,14 @@ module Page.Welcome.View
 
 import Prologue hiding (div)
 import Clipboard (Action(..)) as Clipboard
+import Component.Contacts.Lenses (_walletNickname)
+import Component.Contacts.View (walletIdTip)
 import Component.InputField.Lenses (_value)
 import Component.InputField.State (validate)
 import Component.InputField.Types (InputDisplayOptions)
 import Component.InputField.View (renderInput)
 import Component.Label as Label
 import Component.WalletId as WalletId
-import Component.Contacts.Lenses (_walletNickname)
-import Component.Contacts.View (walletIdTip)
 import Css as Css
 import Data.Lens (view, (^.))
 import Data.List (foldMap)

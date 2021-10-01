@@ -1,4 +1,4 @@
-module Dashboard.Lenses
+module Page.Dashboard.Lenses
   ( _contactsState
   , _walletDetails
   , _walletCompanionStatus
@@ -17,7 +17,7 @@ import Prologue
 import Component.Contacts.Types (State) as Contacts
 import Component.Contacts.Types (WalletDetails)
 import Component.Template.Types (State) as Template
-import Dashboard.Types (Card, ContractFilter, State, WalletCompanionStatus)
+import Page.Dashboard.Types (Card, ContractFilter, State, WalletCompanionStatus)
 import Data.Lens (Lens', Traversal', set, wander)
 import Data.Lens.At (at)
 import Data.Lens.Prism.Maybe (_Just)

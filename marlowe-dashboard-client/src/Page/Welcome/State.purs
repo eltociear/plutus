@@ -11,11 +11,11 @@ import Capability.MarloweStorage (class ManageMarloweStorage, clearAllLocalStora
 import Capability.Toast (class Toast, addToast)
 import Clipboard (class MonadClipboard)
 import Clipboard (handleAction) as Clipboard
-import Component.InputField.State (handleAction, mkInitialState) as InputField
-import Component.InputField.Types (Action(..), State) as InputField
 import Component.Contacts.Lenses (_companionAppId, _walletNickname)
 import Component.Contacts.State (parsePlutusAppId, walletNicknameError)
 import Component.Contacts.Types (WalletDetails, WalletLibrary, WalletNicknameError)
+import Component.InputField.State (handleAction, mkInitialState) as InputField
+import Component.InputField.Types (Action(..), State) as InputField
 import Control.Monad.Reader (class MonadAsk)
 import Data.Foldable (for_)
 import Data.Lens (assign, modifying, set, use, view, (^.))

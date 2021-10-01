@@ -1,4 +1,4 @@
-module Dashboard.State
+module Page.Dashboard.State
   ( dummyState
   , mkInitialState
   , handleAction
@@ -27,8 +27,8 @@ import Component.Contacts.Types (Action(..), State) as Contacts
 import Component.Contacts.Types (CardSection(..), WalletDetails, WalletLibrary)
 import Control.Monad.Reader (class MonadAsk)
 import Control.Monad.Reader.Class (ask)
-import Dashboard.Lenses (_card, _cardOpen, _contractFilter, _contract, _contracts, _menuOpen, _selectedContract, _selectedContractFollowerAppId, _templateState, _walletCompanionStatus, _contactsState, _walletDetails)
-import Dashboard.Types (Action(..), Card(..), ContractFilter(..), Input, State, WalletCompanionStatus(..))
+import Page.Dashboard.Lenses (_card, _cardOpen, _contractFilter, _contract, _contracts, _menuOpen, _selectedContract, _selectedContractFollowerAppId, _templateState, _walletCompanionStatus, _contactsState, _walletDetails)
+import Page.Dashboard.Types (Action(..), Card(..), ContractFilter(..), Input, State, WalletCompanionStatus(..))
 import Data.Array (null)
 import Data.Foldable (for_)
 import Data.Lens (assign, elemOf, filtered, modifying, set, use, view)
