@@ -38,7 +38,7 @@ import Rename.Types as Rename
 import Router (Route)
 import SaveAs.Types as SaveAs
 import SimulationPage.Types as Simulation
-import Tooltip.Types (ReferenceId)
+import Component.Tooltip.Types (ReferenceId)
 import Types (WebData)
 import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 

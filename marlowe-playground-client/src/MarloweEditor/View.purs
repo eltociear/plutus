@@ -3,6 +3,9 @@ module MarloweEditor.View where
 import Prelude hiding (div)
 import BottomPanel.Types (Action(..)) as BottomPanel
 import BottomPanel.View (render) as BottomPanel
+import Component.Popper (Placement(..))
+import Component.Tooltip.State (tooltip)
+import Component.Tooltip.Types (ReferenceId(..))
 import Data.Array as Array
 import Data.Bifunctor (bimap)
 import Data.Enum (toEnum, upFromIncluding)
@@ -23,9 +26,6 @@ import Marlowe.Extended.Metadata (MetaData)
 import Marlowe.Monaco as MM
 import MarloweEditor.BottomPanel (panelContents)
 import MarloweEditor.Types (Action(..), BottomPanelView(..), State, _bottomPanelState, _editorErrors, _editorWarnings, _keybindings, contractHasErrors, contractHasHoles)
-import Popper (Placement(..))
-import Tooltip.State (tooltip)
-import Tooltip.Types (ReferenceId(..))
 
 render ::
   forall m.

@@ -1,10 +1,10 @@
-module Tooltip.Types where
+module Component.Tooltip.Types where
 
 import Prelude
+import Component.Popper (Placement, PopperInstance)
 import Data.Maybe (Maybe)
 import Data.Newtype (class Newtype)
 import Halogen (RefLabel(..))
-import Popper (Placement, PopperInstance)
 
 newtype ReferenceId
   = RefId String

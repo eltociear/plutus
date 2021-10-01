@@ -1,11 +1,11 @@
-module Material.Progress.Circular where
+module Component.Progress.Circular where
 
 import Prelude
+import Component.Progress (Progress(..), progressClass)
 import Data.Int (toNumber)
 import Halogen.Css as HC
 import Halogen.HTML as HH
 import Halogen.SVG as HS
-import Material.Progress (Progress(..), progressClass)
 
 type Spec
   = { color :: String

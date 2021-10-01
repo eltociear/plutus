@@ -1,4 +1,4 @@
-module Tooltip.Lenses where
+module Component.Tooltip.Lenses where
 
 import Prelude
 import Data.Lens (Lens', Traversal')

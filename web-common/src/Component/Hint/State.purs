@@ -1,6 +1,10 @@
-module Hint.State (component, hint) where
+module Component.Hint.State (component, hint) where
 
 import Prelude
+import Component.Hint.Lenses (_active, _content, _mGlobalClickSubscription, _mPopperInstance, _placement)
+import Component.Hint.Types (Action(..), Input, State, arrowRef, hintRef, popoutRef)
+import Component.Hint.View (render)
+import Component.Popper (OffsetOption(..), PaddingOption(..), Placement, PositioningStrategy(..), arrow, createPopper, defaultFlip, defaultModifiers, defaultPreventOverflow, destroyPopper, flipPlacement, forceUpdate, offset, pAll, preventOverflow)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Data.Array (all)
 import Data.Foldable (for_)
@@ -15,10 +19,6 @@ import Halogen as H
 import Halogen.HTML (ComponentHTML, HTML, PlainHTML, slot)
 import Halogen.Query.EventSource (EventSource)
 import Halogen.Query.EventSource as EventSource
-import Hint.Lenses (_active, _content, _mGlobalClickSubscription, _mPopperInstance, _placement)
-import Hint.Types (Action(..), Input, State, arrowRef, hintRef, popoutRef)
-import Hint.View (render)
-import Popper (OffsetOption(..), PaddingOption(..), Placement, PositioningStrategy(..), arrow, createPopper, defaultFlip, defaultModifiers, defaultPreventOverflow, destroyPopper, flipPlacement, forceUpdate, offset, pAll, preventOverflow)
 import Web.Event.Event (EventType(..))
 import Web.Event.EventTarget (addEventListener, eventListener, removeEventListener)
 import Web.HTML (HTMLElement, window)

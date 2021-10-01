@@ -1,9 +1,9 @@
-module Hint.Types where
+module Component.Hint.Types where
 
 import Data.Maybe (Maybe)
+import Component.Popper (Placement, PopperInstance)
 import Halogen (RefLabel(..), SubscriptionId)
 import Halogen.HTML (PlainHTML)
-import Popper (Placement, PopperInstance)
 
 type State
   = { content :: PlainHTML

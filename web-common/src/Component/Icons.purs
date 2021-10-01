@@ -1,6 +1,6 @@
 -- All available icons can be found here: https://material.io/resources/icons/?icon=timer&style=round
 -- TODO: replace web-common Icons module with this one
-module Material.Icons
+module Component.Icons
   ( icon
   , icon_
   , Icon(..)
@@ -8,9 +8,9 @@ module Material.Icons
   ) where
 
 import Prelude
+import Data.Array (cons)
 import Halogen.HTML (ClassName(ClassName), HTML, span, text)
 import Halogen.HTML.Properties (classes)
-import Data.Array (cons)
 
 icon :: forall p i. Icon -> Array String -> HTML p i
 icon i extraClasses = span [ classes $ ClassName <$> cons "material-icons-round" extraClasses ] [ text $ content i ]

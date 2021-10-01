@@ -1,4 +1,4 @@
-module Material.Progress where
+module Component.Progress where
 
 data Progress
   = Progress0

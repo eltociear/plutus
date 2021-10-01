@@ -21,7 +21,6 @@ import Component.Contacts.Types (WalletDetails, WalletNickname)
 import Component.LoadingSubmitButton.Types (Query(..), _submitButtonSlot)
 import Control.Monad.Reader (class MonadAsk, asks)
 import Control.Monad.Reader.Class (ask)
-import Page.Dashboard.Types (Action(..)) as Dashboard
 import Data.Array (difference, filter, foldl, index, length, mapMaybe, modifyAt, null)
 import Data.Array as Array
 import Data.Array.NonEmpty (NonEmptyArray)
@@ -67,6 +66,7 @@ import Marlowe.Semantics (Contract, MarloweData, MarloweParams, Party(..), Slot,
 import Marlowe.Semantics (Input(..)) as Semantic
 import Page.Contract.Lenses (_Started, _executionState, _expandPayments, _namedActions, _participants, _pendingTransaction, _previousSteps, _selectedStep, _userParties)
 import Page.Contract.Types (Action(..), Input, PreviousStep, PreviousStepState(..), StartedState, State(..), Tab(..), scrollContainerRef)
+import Page.Dashboard.Types (Action(..)) as Dashboard
 import Toast.Types (ajaxErrorToast, successToast)
 import Web.DOM.Element (getElementsByClassName)
 import Web.DOM.HTMLCollection as HTMLCollection

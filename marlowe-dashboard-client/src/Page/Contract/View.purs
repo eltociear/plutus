@@ -6,8 +6,13 @@ module Page.Contract.View
 
 import Prologue hiding (div)
 import Component.Contacts.State (adaToken, getAda)
+import Component.Hint.State (hint)
+import Component.Icons (Icon(..)) as Icon
+import Component.Icons (icon, icon_)
 import Component.LoadingSubmitButton.State (loadingSubmitButton)
 import Component.LoadingSubmitButton.Types (Message(..))
+import Component.Popper (Placement(..))
+import Component.Progress.Circular as Progress
 import Css as Css
 import Data.Array (foldr, fromFoldable, intercalate, length)
 import Data.Array as Array
@@ -31,7 +36,6 @@ import Halogen.HTML (HTML, a, button, div, div_, h2, h3, h4, h4_, input, p, p_, 
 import Halogen.HTML.Events (onClick)
 import Halogen.HTML.Events.Extra (onClick_, onValueInput_)
 import Halogen.HTML.Properties (IProp, InputType(..), enabled, id_, placeholder, ref, type_, value)
-import Hint.State (hint)
 import Humanize (contractIcon, formatDate, formatTime, humanizeDuration, humanizeOffset, humanizeValue)
 import MainFrame.Types (ChildSlots)
 import Marlowe.Execution.Lenses (_contract, _mNextTimeout, _semanticState)
@@ -42,16 +46,12 @@ import Marlowe.PAB (transactionFee)
 import Marlowe.Semantics (Assets, Bound(..), ChoiceId(..), Contract(..), Party(..), Payee(..), Payment(..), Slot, SlotInterval(..), Token, TransactionInput(..), _accounts, getEncompassBound)
 import Marlowe.Semantics (Input(..)) as S
 import Marlowe.Slot (secondsDiff, slotToDateTime)
-import Material.Icons (Icon(..)) as Icon
-import Material.Icons (icon, icon_)
-import Material.Progress.Circular as Progress
 import Page.Contract.Lenses (_executionState, _expandPayments, _metadata, _namedActions, _participants, _pendingTransaction, _previousSteps, _resultingPayments, _selectedStep, _stateMetadata, _stateNickname, _userParties)
 import Page.Contract.State (currentStep, isContractClosed)
 import Page.Contract.Types (Action(..), Input, Movement(..), PreviousStep, PreviousStepState(..), StartedState, State(..), StepBalance, Tab(..), TimeoutInfo, scrollContainerRef)
-import Popper (Placement(..))
 import Text.Markdown.TrimmedInline (markdownToHTML)
-import Tooltip.State (tooltip)
-import Tooltip.Types (ReferenceId(..))
+import Component.Tooltip.State (tooltip)
+import Component.Tooltip.Types (ReferenceId(..))
 
 -------------------------------------------------------------------------------
 -- Top-level views

@@ -1,4 +1,4 @@
-module Popper.Internal
+module Component.Popper.Internal
   ( createPopper -- constructor
   -- instance methods
   , forceUpdate
@@ -15,6 +15,7 @@ module Popper.Internal
   ) where
 
 import Prelude
+import Component.Popper.Types (Boundary(..), ComputeStyleOptions, EventListenerOptions, Modifier, Offset, OffsetOption(..), Options, Padding(..), PaddingOption(..), Placement(..), PopperInstance, PositioningStrategy(..), PreventOverflowOptions, Rect, RootBoundary(..), TetherOffsetOption(..), FlipOptions)
 import Data.Array as Array
 import Data.Function.Uncurried (Fn0, Fn1, Fn2, runFn0, runFn1, runFn2)
 import Data.Tuple (Tuple(..))
@@ -24,7 +25,6 @@ import Effect.Uncurried (EffectFn1, EffectFn3, runEffectFn1, runEffectFn3)
 import Foreign (Foreign, unsafeToForeign)
 import Foreign.Generic (encode) as Foreign
 import Foreign.Object as Object
-import Popper.Types (Boundary(..), ComputeStyleOptions, EventListenerOptions, Modifier, Offset, OffsetOption(..), Options, Padding(..), PaddingOption(..), Placement(..), PopperInstance, PositioningStrategy(..), PreventOverflowOptions, Rect, RootBoundary(..), TetherOffsetOption(..), FlipOptions)
 import Web.HTML (HTMLElement)
 
 -------------------------------------------------------------------------------------------------------

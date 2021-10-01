@@ -3,6 +3,9 @@ module SimulationPage.View where
 import Prelude hiding (div)
 import BottomPanel.Types as BottomPanelTypes
 import BottomPanel.View as BottomPanel
+import Component.Hint.State (hint)
+import Component.Icons as Icon
+import Component.Popper (Placement(..))
 import Data.Array (concatMap, intercalate, length, reverse, sortWith)
 import Data.Array as Array
 import Data.Bifunctor (bimap)
@@ -13,8 +16,10 @@ import Data.Lens.Iso.Newtype (_Newtype)
 import Data.Lens.NonEmptyList (_Head)
 import Data.Map (Map)
 import Data.Map as Map
+import Data.Map.Ordered.OMap as OMap
 import Data.Maybe (Maybe(..), fromMaybe, isJust, maybe)
 import Data.Newtype (unwrap, wrap)
+import Data.Set.Ordered.OSet (OSet)
 import Data.String (trim)
 import Data.Tuple (Tuple(..), snd)
 import Data.Tuple.Nested (type (/\), (/\))
@@ -28,17 +33,12 @@ import Halogen.HTML (ClassName(..), ComponentHTML, HTML, PlainHTML, aside, b_, b
 import Halogen.HTML.Events (onClick)
 import Halogen.HTML.Properties (class_, classes, disabled)
 import Halogen.Monaco (monacoComponent)
-import Hint.State (hint)
 import MainFrame.Types (ChildSlots, _simulatorEditorSlot)
 import Marlowe.Extended.Metadata (MetaData, NumberFormat(..), getChoiceFormat)
-import Data.Map.Ordered.OMap as OMap
-import Data.Set.Ordered.OSet (OSet)
 import Marlowe.Monaco as MM
 import Marlowe.Semantics (AccountId, Assets(..), Bound(..), ChoiceId(..), Input(..), Party(..), Payee(..), Payment(..), PubKey, Slot, SlotInterval(..), Token(..), TransactionInput(..), inBounds, timeouts)
 import Marlowe.Template (IntegerTemplateType(..), orderContentUsingMetadata)
-import Material.Icons as Icon
 import Monaco as Monaco
-import Popper (Placement(..))
 import Pretty (renderPrettyParty, renderPrettyPayee, renderPrettyToken, showPrettyChoice, showPrettyMoney)
 import SimulationPage.BottomPanel (panelContents)
 import SimulationPage.Lenses (_bottomPanelState)

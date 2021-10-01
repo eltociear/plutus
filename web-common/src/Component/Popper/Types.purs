@@ -1,4 +1,4 @@
-module Popper.Types where
+module Component.Popper.Types where
 
 import Prelude
 import Control.Alt ((<|>))

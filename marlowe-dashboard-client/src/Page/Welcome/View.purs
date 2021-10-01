@@ -7,6 +7,8 @@ import Prologue hiding (div)
 import Clipboard (Action(..)) as Clipboard
 import Component.Contacts.Lenses (_walletNickname)
 import Component.Contacts.View (walletIdTip)
+import Component.Icons (Icon(..)) as Icon
+import Component.Icons (icon, icon_)
 import Component.InputField.Lenses (_value)
 import Component.InputField.State (validate)
 import Component.InputField.Types (InputDisplayOptions)
@@ -27,8 +29,6 @@ import Halogen.HTML.Events.Extra (onClick_)
 import Halogen.HTML.Properties (disabled, href, src, title)
 import Images (marloweRunLogo)
 import Marlowe.PAB (PlutusAppId)
-import Material.Icons (Icon(..)) as Icon
-import Material.Icons (icon, icon_)
 import Network.RemoteData (isSuccess)
 import Page.Welcome.Lenses (_card, _cardOpen, _enteringDashboardState, _remoteWalletDetails, _walletId, _walletLibrary, _walletNicknameInput, _walletNicknameOrIdInput)
 import Page.Welcome.Types (Action(..), Card(..), State)

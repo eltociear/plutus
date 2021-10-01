@@ -1,4 +1,4 @@
-module Hint.Lenses where
+module Component.Hint.Lenses where
 
 import Data.Lens (Lens')
 import Data.Lens.Record (prop)
