@@ -5,6 +5,8 @@ module Page.Contract.View
   ) where
 
 import Prologue hiding (div)
+import Component.LoadingSubmitButton.State (loadingSubmitButton)
+import Component.LoadingSubmitButton.Types (Message(..))
 import Contacts.State (adaToken, getAda)
 import Css as Css
 import Data.Array (foldr, fromFoldable, intercalate, length)
@@ -31,8 +33,6 @@ import Halogen.HTML.Events.Extra (onClick_, onValueInput_)
 import Halogen.HTML.Properties (IProp, InputType(..), enabled, id_, placeholder, ref, type_, value)
 import Hint.State (hint)
 import Humanize (contractIcon, formatDate, formatTime, humanizeDuration, humanizeOffset, humanizeValue)
-import LoadingSubmitButton.State (loadingSubmitButton)
-import LoadingSubmitButton.Types (Message(..))
 import MainFrame.Types (ChildSlots)
 import Marlowe.Execution.Lenses (_contract, _mNextTimeout, _semanticState)
 import Marlowe.Execution.State (expandBalances)

@@ -9,6 +9,7 @@ module MainFrame.Types
 
 import Prologue
 import Analytics (class IsEvent, defaultEvent, toEvent)
+import Component.LoadingSubmitButton.Types as LoadingSubmitButton
 import Contacts.Types (WalletDetails, WalletLibrary)
 import Dashboard.Types (Action, State) as Dashboard
 import Data.Generic.Rep (class Generic)
@@ -16,7 +17,6 @@ import Data.Map (Map)
 import Data.Time.Duration (Minutes)
 import Halogen as H
 import Halogen.Extra (LifecycleEvent)
-import LoadingSubmitButton.Types as LoadingSubmitButton
 import Marlowe.PAB (PlutusAppId)
 import Marlowe.Semantics (Slot)
 import Page.Contract.Types (State) as Contract

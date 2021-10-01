@@ -1,4 +1,4 @@
-module LoadingSubmitButton.Lenses where
+module Component.LoadingSubmitButton.Lenses where
 
 import Data.Lens (Lens')
 import Data.Lens.Record (prop)

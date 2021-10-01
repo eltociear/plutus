@@ -1,6 +1,9 @@
-module LoadingSubmitButton.State (loadingSubmitButton) where
+module Component.LoadingSubmitButton.State (loadingSubmitButton) where
 
 import Prologue
+import Component.LoadingSubmitButton.Lenses (_buttonHeight, _caption, _enabled, _status, _styles)
+import Component.LoadingSubmitButton.Types (Action(..), Input, Message(..), Query(..), State, _submitButtonSlot, buttonRef)
+import Component.LoadingSubmitButton.View (render)
 import Control.Monad.Cont (lift)
 import Control.Monad.Maybe.Trans (MaybeT(..), runMaybeT)
 import Data.Int (round)
@@ -11,9 +14,6 @@ import Halogen (Component, HalogenM, Slot, getHTMLElementRef, liftEffect, mkComp
 import Halogen as H
 import Halogen.Animation (waitForAllAnimations)
 import Halogen.HTML (ComponentHTML, HTML, slot)
-import LoadingSubmitButton.Lenses (_buttonHeight, _caption, _enabled, _status, _styles)
-import LoadingSubmitButton.Types (Action(..), Input, Message(..), Query(..), State, _submitButtonSlot, buttonRef)
-import LoadingSubmitButton.View (render)
 import Network.RemoteData (RemoteData(..), fromEither)
 import Web.DOM.DOMTokenList as DOMTokenList
 import Web.DOM.Element (removeAttribute, setAttribute)

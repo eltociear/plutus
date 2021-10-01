@@ -1,4 +1,4 @@
-module LoadingSubmitButton.Types where
+module Component.LoadingSubmitButton.Types where
 
 import Prologue
 import Data.Symbol (SProxy(..))

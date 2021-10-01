@@ -1,12 +1,12 @@
-module LoadingSubmitButton.View (render) where
+module Component.LoadingSubmitButton.View (render) where
 
 import Prologue hiding (div)
+import Component.LoadingSubmitButton.Types (Action(..), State, buttonRef)
 import Css as Css
 import Halogen.Css (classNames)
 import Halogen.HTML (HTML, div, text, button)
 import Halogen.HTML.Events (onClick)
 import Halogen.HTML.Properties (disabled, ref)
-import LoadingSubmitButton.Types (Action(..), State, buttonRef)
 import Material.Icons as Icon
 import Network.RemoteData (RemoteData(..))
 
